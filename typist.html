@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Recursive:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typist Effect</title>
+    <style>
+        body {
+            background-color: turquoise;
+        }
+        
+        h3 {
+            text-align: center;
+            font-size: 50px;
+            font-family: recursive;
+            color: white;
+            text-shadow: 2px 2px black;
+        }
+        
+        a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .fa-heart {
+            color: red;
+        }
+        
+        .type-container {
+            position: relative;
+            font-size: 1.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #line {
+            margin-top: 8%;
+            position: relative;
+            font-size: 50px;
+            font-weight: bold;
+            font-family: Acme;
+            color: white;
+            text-shadow: 3px 3px black;
+        }
+        
+        .cursor {
+            height: 2rem;
+            width: 2px;
+            margin-left: 2px;
+            animation: blinkTextCursor 800ms infinite;
+        }
+        
+        @keyframes blinkTextCursor {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        
+        footer {
+            font-family: acme;
+            color: white;
+            text-shadow: 1px 1px black;
+            margin-top: 80px;
+            text-align: center;
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>TYPIST EFFECT <i class="fas fa-laptop-code"></i></h3>
+    <div class="type-container">
+        <p id="line"></p>
+        <div class="cursor"></div>
+    </div>
+    <footer>
+        Made with <i class="fas fa-heart"></i> by <a href="https://github.com/bhavesh1129">@Bhavesh</a>
+    </footer>
+    <script>
+        var line = document.getElementById("line")
+        var txts = ["Hi, I'm Bhavesh Garg", "Sophomore", "a Web-Developer", "a Digital Marketer"];
+        var speed = 100
+
+        async function typewriter(txt) {
+            for (let i = 0; i < txt.length; i++) {
+                line.innerHTML += txt.charAt(i);
+                await delay(speed)
+            }
+        }
+
+        async function reverseTypewriter(txt) {
+            for (let i = txt.length; i > 0; i--) {
+                line.innerHTML = line.innerHTML.slice(0, -1)
+                await delay(speed)
+            }
+        }
+
+        async function writeLoop() {
+
+            for (let i = 0; i < txts.length; i++) {
+                await typewriter(txts[i])
+                await delay(1000)
+                await reverseTypewriter(txts[i])
+                await delay(100)
+            }
+
+            writeLoop()
+        }
+
+        function delay(ms) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve()
+                }, ms)
+            })
+        }
+
+        writeLoop()
+    </script>
+
+</body>
+
+</html>
